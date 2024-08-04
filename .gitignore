@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Chapter 6/.vs/FunctionsChapter6
+/Chapter 6/FunctionsChapter6/bin
+/Chapter 6/FunctionsChapter6/obj
