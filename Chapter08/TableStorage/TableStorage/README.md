@@ -1,0 +1,1 @@
+#Demonstration code for chapter 8 of Building APIs with .NET (Writing to Azure Tables)
