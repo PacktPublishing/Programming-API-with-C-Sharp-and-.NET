@@ -1,0 +1,5 @@
+﻿POST http://localhost:7071/runtime/webhooks/durabletask/instances/24bb42a73ae743f9b79e5fd418ebd6cf/raiseEvent/MyEvent?code=<your code from azure here>
+Content-Type: application/json
+
+{ "value": "hello durable world!" }
+
