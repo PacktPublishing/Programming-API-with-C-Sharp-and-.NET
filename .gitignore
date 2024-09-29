@@ -3,9 +3,9 @@
 ################################################################################
 
 /.vs
-/Chapter 6/.vs/FunctionsChapter6
-/Chapter 6/FunctionsChapter6/bin
-/Chapter 6/FunctionsChapter6/obj
+/Chapter06/.vs
+/Chapter06/FunctionsChapter06/bin
+/Chapter06/FunctionsChapter06/obj
 /Chapter07/DurableFunctionsChapter07/bin
 /Chapter07/DurableFunctionsChapter07/obj
 /Chapter07/.vs
