@@ -14,3 +14,7 @@
 /Chapter09/AuthAndAuthChapter09/obj
 /Chapter09/ClientApp/obj
 /Chapter09/ClientApp/bin
+*.user
+/Chapter03/.vs
+/Chapter03/bin
+/Chapter03/obj
