@@ -24,26 +24,6 @@ public class Program
             .ConfigureAppConfiguration((ctx, configuration) =>
             {
                 var settings = configuration.Build();
-
-                var keyVaultName = settings["Azure:KeyVaultName"];
-
-                if (string.IsNullOrEmpty(keyVaultName))
-                {
-                    throw new Exception("Azure__KeyVaultName can not be empty");
-                }
-
-                var tenantId = settings["Azure:TenantId"];
-                if (string.IsNullOrEmpty(tenantId))
-                {
-                    throw new Exception("Azure__TenantId can not be empty");
-                }
-
-                //configuration.AddAzureKeyVault(
-                //    new Uri("https://" + keyVaultName + ".vault.azure.net/"),
-                //    new DefaultAzureCredential(new DefaultAzureCredentialOptions
-                //    {
-                //        TenantId = tenantId
-                //    }));
             })
             .Build();
 
