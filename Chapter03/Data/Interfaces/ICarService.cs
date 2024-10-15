@@ -7,5 +7,6 @@ namespace Cars.Data.Interfaces
         Task<Car> Insert(Car car);
         Task<Car> Update(Car car);
         Task Delete(int id);
+        Task<Car> Get(int id);
     }
 }

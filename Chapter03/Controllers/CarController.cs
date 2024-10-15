@@ -1,3 +1,6 @@
+using System.Net.Mime;
+using AutoMapper;
+using Cars.Data.DTOs;
 using Cars.Data.Entities;
 using Cars.Data.Interfaces;
 using Cars.Data.Repositories;
@@ -12,18 +15,29 @@ namespace Cars.Controllers
         private readonly ILogger<CarController> _logger;
         private readonly ICarRepository _carRepository;
         private readonly ICarService _carService;
+        private readonly IMapper _mapper;
+
 
         public CarController(ILogger<CarController> logger,
             ICarRepository carRepository,
-            ICarService carService)
+            ICarService carService,
+            IMapper mapper)
         {
            _logger = logger;
            _carRepository = carRepository;
            _carService = carService;
+            _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all the cars in the Database 
+        /// </summary>
+        /// <param name="returnDeletedRecords">If true, the method will return all the records</param> 
+        /// <response code="200">Cars returned</response>
+        /// <response code="404">Specified Car not found</response>
+        /// <response code="500">An Internal Server Error prevented the request from being executed.</response>
         [HttpGet]
-        public async Task<IEnumerable<Car>> GetAll(bool returnDeletedRecords = false)
+        public async Task<IEnumerable<Car>> GetAll([FromRoute] bool returnDeletedRecords = false)
         {
             return await _carRepository.GetAll(returnDeletedRecords);
         }
@@ -31,7 +45,7 @@ namespace Cars.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> Get(int id)
         {
-            var car = await _carRepository.Get(id);
+            var car = await _carService.Get(id);
             if (car == null)
             {
                 return NotFound();
@@ -40,18 +54,25 @@ namespace Cars.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Car>> Post([FromBody] Car car)
+        public async Task<ActionResult<Car>> Insert([FromBody] CarDto carAsDto)
         {
             try
             {
-                car = await _carService.Insert(car);
+                if (carAsDto == null)
+                {
+                    return BadRequest("No car was provided");
+                }
+
+                var carToInsert = _mapper.Map<Car>(carAsDto);
+                var insertedCar = await _carService.Insert(carToInsert);
+                var insertedCarDto = _mapper.Map<CarDto>(insertedCar);
+                var location = $"https://localhost:5001/car/{insertedCarDto.Id}";
+                return Created(location, insertedCarDto);
             }
             catch (Exception e)
             {
-                return BadRequest(e);             
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
-            return CreatedAtAction(nameof(Get), new { id = car.Id }, car);
         }
 
         [HttpPut]

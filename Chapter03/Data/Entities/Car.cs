@@ -2,15 +2,15 @@ namespace Cars.Data.Entities;
 
 public class Car
 {
-    public int Id { get; set; }
-    public string name { get; set; } = null!;
-    public string mpg { get; set; } = null!;
-    public string cylinders { get; set; } = null!;
-    public string displacement { get; set; } = null!;
-    public string horsepower { get; set; } = null!;
-    public string weight { get; set; } = null!;
-    public string acceleration { get; set; } = null!;
-    public string model_year { get; set; } = null!;
-    public string origin { get; set; } = null!;
+    public int id { get; set; }
+    public string name { get; set; } 
+    public string mpg { get; set; } 
+    public string cylinders { get; set; } 
+    public string displacement { get; set; } 
+    public string horsepower { get; set; } 
+    public string weight { get; set; } 
+    public string acceleration { get; set; } 
+    public string model_year { get; set; } 
+    public string origin { get; set; } 
     public string? is_deleted { get; set;}
 }

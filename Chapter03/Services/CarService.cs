@@ -11,13 +11,22 @@ namespace Cars.Services
         {
             _carRepository = carRepository;
         }
-        
+
+        public async Task<Car> Get(int id)
+        {
+            if (id == 0)
+            {
+                throw new Exception("Invalid Id");
+            }
+            return await _carRepository.Get(id);
+        }     
+
         public async Task<Car> Insert(Car car)
         {
             var newId = await _carRepository.UpsertAsync(car);
             if (newId > 0)
             {
-                car.Id = newId;
+                car.id = newId;
             }
             else
             {
@@ -28,12 +37,12 @@ namespace Cars.Services
 
         public async Task<Car> Update(Car car)
         {
-            if (car.Id == 0)
+            if (car.id == 0)
             {
                 throw new Exception("Id must be set");
             }
 
-            var oldId = car.Id;
+            var oldId = car.id;
 
             var newId = await _carRepository.UpsertAsync(car);
 
