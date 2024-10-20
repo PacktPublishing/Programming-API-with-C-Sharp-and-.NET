@@ -36,6 +36,8 @@ public partial class Program
 
         app.MapControllers();
 
+        //app.MapGet("/car-minimal", (ICarRepository carRepository) => { return carRepository.GetAll(); });
+
         app.Run();
     }
 }
